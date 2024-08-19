@@ -1,7 +1,13 @@
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 const Messages = ({ user, selectedUser, messages }) => {
+
+  const messagesEndRef = useRef(null);
+    // Scroll to bottom whenever messages change
+    useEffect(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
 
   return (
     <div className="chat-messages">
@@ -18,6 +24,8 @@ const Messages = ({ user, selectedUser, messages }) => {
       ) : (
         <p>Select a user to start chatting</p>
       )}
+      {/* This element ensures scrolling happens to the bottom */}
+      <div ref={messagesEndRef} />
     </div>
   );
 };

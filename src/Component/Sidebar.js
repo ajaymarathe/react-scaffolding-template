@@ -27,7 +27,6 @@ function Sidebar({ user, users, onSelectUser, onLogout }) {
       </div>
       <div className="chat-list">
         {users.map((u) => {
-          console.log("u:", u);
           return (
             <div
               key={`${u.uid}_${u.displayName}`}

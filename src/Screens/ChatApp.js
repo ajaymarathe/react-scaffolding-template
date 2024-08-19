@@ -23,7 +23,6 @@ function ChatApp() {
 
   const [selectedUser, setSelectedUser] = useState(null);
   const [messages, setMessages] = useState([]);
-  // console.log("selectedUser", selectedUser);
 
   useEffect(() => {
     if (!user) {
@@ -51,27 +50,29 @@ function ChatApp() {
 
   useEffect(() => {
     if (selectedUser) {
-      const messagesRef = collection(db, "messages");
+      const messagesRef = collection(db, 'messages');
       const q = query(
-        messagesRef,
-        where("participants", "array-contains-any", [
-          user.uid,
-          selectedUser.uid,
-        ]),
-        orderBy("timestamp", "asc")
+        messagesRef, 
+        where('participants', 'array-contains', user.uid),
+        orderBy('timestamp', 'asc')
       );
 
-      const unsubscribe = onSnapshot(q, (snapshot) => {
-        const messagesData = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+      const unsubscribe = onSnapshot(q, snapshot => {
+        const messagesData = snapshot.docs
+          .filter(doc => doc.data().participants.includes(selectedUser.uid)) // Filter by selected user
+          .map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
         setMessages(messagesData);
       });
 
       return () => unsubscribe();
+    } else {
+      setMessages([]); // Clear messages when no user is selected
     }
-  }, [selectedUser, user]);
+  }, [selectedUser, user.uid]); // Make sure to use user.uid here to prevent unnecessary re-renders
+
 
   const sendMessage = async (text) => {
     if (selectedUser && text.trim()) {
@@ -103,10 +104,7 @@ function ChatApp() {
       <Sidebar
         users={users}
         user={user}
-        onSelectUser={(u) => {
-          console.log('new u:', u)
-          setSelectedUser(u)
-        }}
+        onSelectUser={(u) => setSelectedUser(u)}
         onLogout={handleLogout}
       />
       <div className="chat-window">
@@ -114,7 +112,7 @@ function ChatApp() {
         <Messages
           messages={messages}
           user={user}
-          selectedUser={(u) => setSelectedUser(u)}
+          selectedUser={ selectedUser }
         />
         <MessageInput onSendMessage={sendMessage} />
       </div>
