@@ -1,27 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
+import router from "./Router";
 
 // import css here
 import "./Styles/ChatApp.scss";
 import "./Styles/LoginScreen.css";
-import LoginScreen from "./Component/LoginScreen";
-import ChatApp from "./Screens/ChatApp";
-
-// Router
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <LoginScreen />
-  },
-  {
-    path: "/chat",
-    element: <ChatApp />
-  }
-]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
