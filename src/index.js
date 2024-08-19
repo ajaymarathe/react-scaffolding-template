@@ -7,7 +7,7 @@ import router from "./Router";
 
 // import css here
 import "./Styles/ChatApp.scss";
-import "./Styles/LoginScreen.css";
+import "./Styles/LoginScreen.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

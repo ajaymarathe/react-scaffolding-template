@@ -1,7 +1,7 @@
 // Router
 
 import { createBrowserRouter } from "react-router-dom";
-import LoginScreen from '../Component/LoginScreen'
+import LoginScreen from '../Screens/LoginScreen'
 import ChatApp from '../Screens/ChatApp'
 
 
