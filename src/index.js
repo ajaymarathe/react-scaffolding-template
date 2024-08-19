@@ -1,16 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // import css here
-import './Styles/ChatApp.css'
+import "./Styles/ChatApp.scss";
+import "./Styles/LoginScreen.css";
+import LoginScreen from "./Component/LoginScreen";
+import ChatApp from "./Screens/ChatApp";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// Router
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LoginScreen />
+  },
+  {
+    path: "/chat",
+    element: <ChatApp />
+  }
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
