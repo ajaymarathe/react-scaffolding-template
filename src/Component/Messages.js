@@ -1,16 +1,23 @@
+
 import React from "react";
 
-const Messages = () => {
+const Messages = ({ user, selectedUser, messages }) => {
+
   return (
     <div className="chat-messages">
-      <div className="message received">
-        <p>Hello!</p>
-        <span>10:00 AM</span>
-      </div>
-      <div className="message sent">
-        <p>Hi! How are you?</p>
-        <span>10:02 AM</span>
-      </div>
+      {selectedUser ? (
+        messages.map(message => (
+          <div 
+            key={message.id} 
+            className={`message ${message.sender === user.uid ? 'sent' : 'received'}`}
+          >
+            <p>{message.text}</p>
+            <span>{new Date(message.timestamp?.toDate()).toLocaleTimeString()}</span>
+          </div>
+        ))
+      ) : (
+        <p>Select a user to start chatting</p>
+      )}
     </div>
   );
 };

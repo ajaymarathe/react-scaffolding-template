@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ChatItem from "./ChatItem";
-import { useNavigate } from "react-router-dom";
-import { auth, db } from "../firebase";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,40 +8,8 @@ import {
   faEllipsisV,
   faCircleNotch,
 } from "@fortawesome/free-solid-svg-icons";
-import { collection, getDocs } from "firebase/firestore";
 
-function Sidebar({ user }) {
-  const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
-
-  console.log("users", users);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const usersCollection = collection(db, "users");
-        const usersSnapshot = await getDocs(usersCollection);
-        const usersList = usersSnapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .filter((u) => u.uid !== user.uid); // Filter out the current logged-in user
-        setUsers(usersList);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
-
-    fetchUsers();
-  }, [user]);
-
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-      navigate("/"); // Redirect to login screen after logout
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
-  };
-
+function Sidebar({ user, users, onSelectUser, onLogout }) {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -61,19 +27,23 @@ function Sidebar({ user }) {
       </div>
       <div className="chat-list">
         {users.map((u) => {
-          console.log('u:', u)
+          console.log("u:", u);
           return (
-            <ChatItem
+            <div
               key={`${u.uid}_${u.displayName}`}
-              name={u.displayName}
-              lastMessage="Say hello!"
-              photoURL={u?.photoURL}
-            />
+              onClick={() => onSelectUser(u)}
+            >
+              <ChatItem
+                name={u.displayName}
+                lastMessage="Say hello!"
+                photoURL={u?.photoURL}
+              />
+            </div>
           );
         })}
       </div>
       <div className="sidebar-footer">
-        <button className="logout-button" onClick={handleLogout}>
+        <button className="logout-button" onClick={onLogout}>
           <FontAwesomeIcon icon={faSignOutAlt} /> Logout
         </button>
       </div>
