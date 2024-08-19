@@ -1,9 +1,10 @@
 import React from "react";
 
-function Header() {
+function Header({ user }) {
   return (
     <div className="chat-header">
-      <h2>Contact 1</h2>
+      <h2>Chat</h2>
+      {user && <p>Logged in as {user.displayName}</p>}
     </div>
   );
 }
