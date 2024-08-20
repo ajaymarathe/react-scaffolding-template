@@ -50,19 +50,19 @@ function ChatApp() {
 
   useEffect(() => {
     if (selectedUser) {
-      const messagesRef = collection(db, 'messages');
+      const messagesRef = collection(db, "messages");
       const q = query(
-        messagesRef, 
-        where('participants', 'array-contains', user.uid),
-        orderBy('timestamp', 'asc')
+        messagesRef,
+        where("participants", "array-contains", user.uid),
+        orderBy("timestamp", "asc")
       );
 
-      const unsubscribe = onSnapshot(q, snapshot => {
+      const unsubscribe = onSnapshot(q, (snapshot) => {
         const messagesData = snapshot.docs
-          .filter(doc => doc.data().participants.includes(selectedUser.uid)) // Filter by selected user
-          .map(doc => ({
+          .filter((doc) => doc.data().participants.includes(selectedUser.uid)) // Filter by selected user
+          .map((doc) => ({
             id: doc.id,
-            ...doc.data()
+            ...doc.data(),
           }));
         setMessages(messagesData);
       });
@@ -72,7 +72,6 @@ function ChatApp() {
       setMessages([]); // Clear messages when no user is selected
     }
   }, [selectedUser, user.uid]); // Make sure to use user.uid here to prevent unnecessary re-renders
-
 
   const sendMessage = async (text) => {
     if (selectedUser && text.trim()) {
@@ -108,12 +107,8 @@ function ChatApp() {
         onLogout={handleLogout}
       />
       <div className="chat-window">
-        <Header user={user} />
-        <Messages
-          messages={messages}
-          user={user}
-          selectedUser={ selectedUser }
-        />
+        <Header selectedUser={selectedUser} />
+        <Messages messages={messages} user={user} selectedUser={selectedUser} />
         <MessageInput onSendMessage={sendMessage} />
       </div>
     </div>

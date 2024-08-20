@@ -1,10 +1,18 @@
 import React from "react";
 
-function Header({ user }) {
+function Header({ selectedUser }) {
   return (
     <div className="chat-header">
-      <h2>Chat</h2>
-      {user && <p>Logged in as {user.displayName}</p>}
+      {selectedUser && (
+        <>
+          <img
+            src={selectedUser.photoURL}
+            className="headerLogo"
+            alt={selectedUser.photoURL}
+          />
+          <p>{selectedUser.displayName}</p>
+        </>
+      )}
     </div>
   );
 }

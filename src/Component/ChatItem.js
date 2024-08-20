@@ -4,7 +4,7 @@ function ChatItem({ name, lastMessage, photoURL }) {
   return (
     <div className="chat-item">
       <img
-        src={"https://via.placeholder.com/40"}
+        src={photoURL || "https://via.placeholder.com/40"}
         alt={name}
         className="chat-item-photo"
       />

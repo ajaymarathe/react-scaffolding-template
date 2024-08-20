@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-body, button, input {
-  font-family: 'Poppins', sans-serif !important;
+body,
+button,
+input {
+  font-family: "Poppins", sans-serif !important;
   margin: 0;
   padding: 0;
 }
@@ -22,7 +24,7 @@ body, button, input {
 .sidebar-header {
   display: flex;
   align-items: center;
-  background-color: #075E54;
+  background-color: #075e54;
   color: white;
   padding: 10px 20px;
   font-size: 18px;
@@ -33,7 +35,8 @@ body, button, input {
   }
 }
 
-.sidebar-header, h2 {
+.sidebar-header,
+h2 {
   text-transform: capitalize;
 }
 
@@ -45,7 +48,7 @@ body, button, input {
 }
 
 .logout-button {
-  background-color: #25D366;
+  background-color: #25d366;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -84,7 +87,6 @@ body, button, input {
 .header-icons i {
   cursor: pointer;
 }
-
 
 .chat-info h3 {
   margin: 0;
@@ -153,15 +155,23 @@ body, button, input {
 }
 
 .chat-header {
-  background-color: #075E54;
+  display: flex;
+  align-items: center;
+  background-color: #075e54;
   color: white;
   padding: 10px 20px;
   text-align: center;
   font-size: 18px;
   height: 78px;
-  h2, p {
-    margin: 0.3em 0em 0.2em;
+  h2,
+  p {
+    margin: 0.3em 0em 0.2em 1em;
     text-transform: capitalize;
+  }
+  .headerLogo {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
   }
 }
 
@@ -225,7 +235,7 @@ body, button, input {
 
 .message-input button {
   padding: 10px 20px;
-  background-color: #075E54;
+  background-color: #075e54;
   color: white;
   border: none;
   border-radius: 20px;
