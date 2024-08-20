@@ -5,10 +5,6 @@ import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
 import router from "./Router";
 
-// import css here
-import "./Styles/ChatApp.scss";
-import "./Styles/LoginScreen.scss";
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

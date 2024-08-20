@@ -1,3 +1,3 @@
-# React real time chat app ( Whatsapp Clone )
+# React Scaffolding Template
 
-A real-time chat app built with React and Firebase, featuring instant messaging and user authentication.
+A quick-start React template with pre-configured settings, organized structure, and essential tools to streamline project setup.
